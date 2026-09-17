@@ -1,0 +1,56 @@
+{
+  "name": "opencode-compact-plugin",
+  "version": "0.1.0",
+  "description": "Agent-callable session inspection and compaction tools for OpenCode V2.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neriousy/compact-plugin.git"
+  },
+  "homepage": "https://github.com/neriousy/compact-plugin#readme",
+  "bugs": "https://github.com/neriousy/compact-plugin/issues",
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "index.js",
+    "API-GAPS.md"
+  ],
+  "keywords": [
+    "opencode",
+    "opencode-plugin",
+    "session",
+    "compaction"
+  ],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node --format esm --packages external && tsgo -p tsconfig.build.json",
+    "typecheck": "tsgo --noEmit",
+    "lint": "oxlint src test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "bun run lint && bun run typecheck && bun run format:check",
+    "test": "bun test",
+    "prepack": "bun run check && bun run test && bun run build"
+  },
+  "dependencies": {
+    "@opencode/client": "2.0.6",
+    "@opencode/plugin": "2.0.6",
+    "@opencode/schema": "2.0.6",
+    "effect": "4.0.0-rc.112"
+  },
+  "devDependencies": {
+    "@types/bun": "1.4.0",
+    "@typescript/native-preview": "7.0.0-dev.20251207.1",
+    "oxlint": "1.60.0",
+    "prettier": "3.6.2"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 120
+  }
+}
